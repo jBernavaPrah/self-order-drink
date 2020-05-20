@@ -1,0 +1,104 @@
+version: '3.4'
+
+networks:
+  laravel:
+
+volumes:
+  pgdata:
+  nodemodules:
+  redisdata:
+
+services:
+  nginx:
+    image: nginx:stable-alpine
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html:z
+      - .cloud/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - php
+      - db
+      - cache
+    networks:
+      - laravel
+
+  adminer:
+    image: adminer
+    restart: always
+    container_name: adminer
+    ports:
+      - 8081:8080
+    networks:
+      - laravel
+
+  php:
+    build:
+      context: .
+      dockerfile: .cloud/php/Dockerfile
+    container_name: php
+
+    volumes:
+      - .:/var/www/html:z
+    networks:
+      - laravel
+
+  composer:
+    image: composer:latest
+    container_name: composer
+    volumes:
+      - .:/var/www/html:z
+    working_dir: /var/www/html
+    networks:
+      - laravel
+
+  npm:
+    image: node:12 #
+    container_name: npm
+    volumes:
+      - .:/var/www/html:z
+    working_dir: /var/www/html
+    entrypoint: ['npm']
+
+  artisan:
+    build:
+      context: .
+      dockerfile: .cloud/php/Dockerfile
+    container_name: artisan
+    volumes:
+      - .:/var/www/html:z
+    depends_on:
+      - db
+    working_dir: /var/www/html
+    entrypoint: ['php', 'artisan']
+    networks:
+      - laravel
+
+  db:
+    container_name: db
+    restart: unless-stopped
+    image: postgres:latest
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      - "POSTGRES_PASSWORD=${POSTGRES_PASSWORD}"
+      - "POSTGRES_DB=${POSTGRES_DB}"
+      - "POSTGRES_USER=${POSTGRES_USER}"
+    networks:
+      - laravel
+
+
+  cache:
+    container_name: cache
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    networks:
+      - laravel
+    command: ["redis-server", "--appendonly", "yes"]
+    volumes:
+      - redisdata:/data
+
