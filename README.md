@@ -30,7 +30,8 @@ $ docker-compose run --rm --no-deps composer install
 $ docker-compose run --rm --no-deps artisan key:generate
 $ docker-compose run --rm --no-deps artisan migrate
 $ docker-compose run --rm --no-deps artisan storage:link
-$ docker-compose run --rm --no-deps npm install
+$ docker-compose run --rm --entrypoint="yarn" --no-deps  npm install
+$ docker-compose run --rm --entrypoint="yarn" --no-deps  npm dev
 $ docker-compose up -d
 ```
 
@@ -38,6 +39,12 @@ Now you can access the application via http://localhost:8080.
 
 **There is no need to run ```php artisan serve```. PHP is already running in a dedicated container.**
 
+## What next?
+
+- Better documentation of API.
+- Docker image for production.
+- Better ui and user experience.
 
 
-
+# Packages:
+- Package created for composer: jbernavaprah/cocktaildb-laravel (https://github.com/jBernavaPrah/cocktaildb-laravel)

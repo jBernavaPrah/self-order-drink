@@ -9,10 +9,10 @@ const Home: FC = () => {
 
     return (
         <Grid container>
-            <Grid item>
-                <Title>Search Your Cocktail</Title>
+            <Grid item >
+                <Title>Search Your Favorite Cocktail</Title>
             </Grid>
-            <Grid container spacing={1} justify="space-between">
+            <Grid container spacing={3} justify="space-between">
                 <Grid item md={7}>
                     <SearchCocktail/>
                 </Grid>

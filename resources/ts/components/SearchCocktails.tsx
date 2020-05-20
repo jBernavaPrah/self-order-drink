@@ -66,11 +66,11 @@ const SearchCocktail: FC = () => {
         <Grid container>
             <Grid item xs={12}>
                 <FormControl fullWidth>
-                    <InputLabel htmlFor="input-search">What taste you search?</InputLabel>
+                    <InputLabel htmlFor="input-search">What taste are you searching for?</InputLabel>
                     <Input value={search}
                            onChange={(e) => setSearch(e.currentTarget.value)}
                            id="input-search" autoFocus placeholder="Example: Vodka "/>
-                    <FormHelperText id="helper-desk">Add the name of Drink or one of ingredient of
+                    <FormHelperText id="helper-desk">Add the name of a Drink or any ingredient of
                         it.</FormHelperText>
                 </FormControl>
                 <Button fullWidth onClick={searchCocktails}>Search</Button>

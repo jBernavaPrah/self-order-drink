@@ -44,7 +44,7 @@ const OrderReview: FC = () => {
     return (
         <Grid container spacing={3}>
             <Grid item xs={12}>
-                <Title>Review Order</Title>
+                <Title>Order Review</Title>
             </Grid>
             <Grid item xs={8}>
                 <Cart hideActions/>

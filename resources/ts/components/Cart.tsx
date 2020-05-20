@@ -34,7 +34,7 @@ const Cart: FC<{ hideActions?: boolean }> = ({hideActions = false}) => {
         <Card>
             <CardContent>
                 <Typography color="textSecondary" variant="subtitle1">
-                    Your Selections
+                    My Order
                 </Typography>
 
                 {!hideActions && order.items.length > 0 &&
