@@ -2,7 +2,7 @@ import Item from "./Item";
 
 type Order = {
     id: number | undefined,
-    table: number | undefined,
+    name: string,
     items: Item[],
 }
 export default Order;

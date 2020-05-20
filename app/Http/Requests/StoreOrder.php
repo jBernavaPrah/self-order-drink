@@ -31,7 +31,7 @@ class StoreOrder extends FormRequest
     public function rules()
     {
         return [
-            'table' => 'required|numeric|min:1',
+            'table' => 'required|string',
             'items' => 'required|array',
             'items.*.quantity' => "required|numeric|min:0",
             'items.*.cocktail_id' => "required|numeric|min:0",

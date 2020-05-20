@@ -12,7 +12,7 @@ const useOrder = () => {
             setOrder(
                 {
                     id: undefined,
-                    table: undefined,
+                    name: "",
                     items: []
                 }
             )

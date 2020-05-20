@@ -1,7 +1,7 @@
 import React from "react";
 import FC from "../types/FC";
 import {Button, Divider, Grid} from "@material-ui/core";
-import {useHistory} from "react-router";
+import {Redirect, useHistory} from "react-router";
 import SubTitle from "../components/SubTitle";
 import path from "../helpers/path";
 import Title from "../components/Title";
@@ -26,18 +26,23 @@ const Order: FC = () => {
 
     const classes = useStyles();
 
+    if (order.items.length === 0) {
+        return (
+            <Redirect to={path(Home)}/>
+        )
+    }
+
     return (
 
         <Grid container justify="center">
             <Grid item xs={6}>
-                <Title>Your Order is <b>{order.id}</b></Title>
-                <SubTitle> and will be served immediately...</SubTitle>
+                <Title>{order.name}, Your Number Order is <b>{order.id}</b></Title>
+                <SubTitle>and will be served immediately</SubTitle>
                 <Divider className={classes.divider} variant="middle"/>
                 <Button onClick={() => {
                     order.reset();
                     history.push(path(Home))
                 }}>Start New Order!</Button>
-
             </Grid>
 
         </Grid>

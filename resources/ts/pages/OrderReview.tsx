@@ -24,12 +24,12 @@ const OrderReview: FC = () => {
     }
 
     const finalizeOrder = async () => {
-        if (!order.table) {
+        if (!order.name) {
             return;
         }
         try {
             const response = await createOrder({
-                table: order.table,
+                table: order.name,
                 items: order.items.map(elem => ({cocktail_id: elem.cocktail.id, quantity: elem.quantity}))
             });
             order.set({...order, id: response.data.data.id});
@@ -58,13 +58,13 @@ const OrderReview: FC = () => {
                 <Typography variant="button">Complete the order</Typography>
 
                 <FormControl fullWidth>
-                    <InputLabel htmlFor="input-search">Your table is:</InputLabel>
-                    <Input value={order.table || ''} type="number"
-                           onChange={(e) => order.set({...order, table: Number(e.currentTarget.value)})}
+                    <InputLabel htmlFor="input-search">Your name is:</InputLabel>
+                    <Input value={order.name || ''}
+                           onChange={(e) => order.set({...order, name: e.currentTarget.value})}
                            id="input-search" autoFocus/>
                 </FormControl>
                 <Divider variant="fullWidth" style={{margin: "5px"}}/>
-                <Button fullWidth size="small" color="primary" disabled={!order.table} onClick={() => finalizeOrder()}>Complete
+                <Button fullWidth size="small" color="primary" disabled={!order.name} onClick={() => finalizeOrder()}>Complete
                     Order!</Button>
 
             </Grid>

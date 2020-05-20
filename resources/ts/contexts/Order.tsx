@@ -6,7 +6,7 @@ type OrderContext = [Order, Dispatch<SetStateAction<Order>>]
 const OrderContext = createContext<OrderContext>([
         {
             id: undefined,
-            table: undefined,
+            name: "",
             items: []
         },
         () => {
@@ -19,7 +19,7 @@ const OrderContextProvider: FC = ({children}) => {
 
     const [order, setOrder] = useState<Order>({
         id: undefined,
-        table: undefined,
+        name: "",
         items: [],
 
     });

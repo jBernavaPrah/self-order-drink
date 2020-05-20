@@ -1,5 +1,5 @@
 type CreateOrder = {
-    table: number,
+    table: string,
     items: { cocktail_id: number, quantity: number }[]
 }
 
