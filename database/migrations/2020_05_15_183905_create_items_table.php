@@ -15,7 +15,7 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('order_id');
+            $table->foreignId('order_id')->constrained()->onDelete('cascade');
             $table->bigInteger('cocktail_id');
             $table->integer('quantity')->default(1);
             $table->timestamps();
